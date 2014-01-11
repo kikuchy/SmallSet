@@ -1,21 +1,23 @@
 #Small Set Library
 
-Small and simple mathematics set library written in C language.
+Small, simple and fast mathematics set library written in C language.
 
 ##Feature
 
-- Fast
+- Fast (Operation)
     - Inplemented using bit operations
-- Support small range
+- Small (Range and size)
+    - Support small range
     - Only ``0`` - ``63`` unsigned integer can be elements of a set.
+    - You need only 2 files.
 - Mathematics set operations
     - union of ``s`` and ``t``
-    - intersection ``s`` and ``t``
-    - difference `` s`` and ``t``
+    - intersection of ``s`` and ``t``
+    - difference of `` s`` and ``t``
     - ``s`` is subset of ``t``
     - ``s`` is superset of ``t``
     - ``x`` is in ``s``
-- Useful API
+- Simple (API)
     - Set object is unbreakable
     - Enumerate using iterator
 
