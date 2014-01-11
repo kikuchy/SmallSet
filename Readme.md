@@ -1,25 +1,27 @@
 #Small Set Library
 
+[![Build Status](https://travis-ci.org/kikuchy/SmallSet.png?branch=master)](https://travis-ci.org/kikuchy/SmallSet)
+
 Small, simple and fast mathematics set library written in C language.
 
 ##Feature
 
-- Fast (Operation)
-    - Inplemented using bit operations
 - Small (Range and size)
     - Support small range
     - Only ``0`` - ``63`` unsigned integer can be elements of a set.
     - You need only 2 files.
-- Mathematics set operations
-    - union of ``s`` and ``t``
-    - intersection of ``s`` and ``t``
-    - difference of `` s`` and ``t``
-    - ``s`` is subset of ``t``
-    - ``s`` is superset of ``t``
-    - ``x`` is in ``s``
 - Simple (API)
     - Set object is unbreakable
     - Enumerate using iterator
+    - Mathematics set operations
+        - union of ``s`` and ``t``
+        - intersection of ``s`` and ``t``
+        - difference of `` s`` and ``t``
+        - ``s`` is subset of ``t``
+        - ``s`` is superset of ``t``
+        - ``x`` is in ``s``
+- Fast (Operation)
+    - Inplemented using bit operations
 
 ##How to use
 
@@ -49,3 +51,10 @@ Small, simple and fast mathematics set library written in C language.
         printf("%d, ", set_iterator_get(&itl));
     }
     // printed: 1, 2, 3
+
+###Build
+
+    cc -c set.c
+    cc -c your_program.c
+    cc set.o your_grogram.o
+    ./a.out
