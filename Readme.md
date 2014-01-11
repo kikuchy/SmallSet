@@ -4,6 +4,8 @@ Small and simple mathematics set library written in C language.
 
 ##Feature
 
+- Fast
+    - Inplemented using bit operations
 - Support small range
     - Only ``0`` - ``63`` unsigned integer can be elements of a set.
 - Mathematics set operations
