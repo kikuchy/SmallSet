@@ -11,7 +11,7 @@ Small, simple and fast mathematics set library written in C language.
     - Only ``0`` - ``63`` unsigned integer can be elements of a set.
     - You need only 2 files.
 - Simple (API)
-    - Set object is unbreakable
+    - Set object is immutable
     - Enumerate using iterator
     - Mathematics set operations
         - union of ``s`` and ``t``
