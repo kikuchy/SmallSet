@@ -29,15 +29,14 @@ Small, simple and fast mathematics set library written in C language.
 
     #include "set.h"
 
-    struct set s = set_construct();
+    struct set s = set_empty();
     s = set_add(s, 1);
     s = set_add(s, 2);
-    s = set_add(s, 3);
+    s = set_add(s, 3);                      // <- (1, 2, 3)
 
-    struct set t = set_construct();
-    t = set_add(t, 0);
-    t = set_add(t, 2);
-    t = set_add(t, 4);
+    int elements[] = { 0, 2, 4 };
+    struct set t = set_construct_from_array(elements, 3);
+                                            // <- (0, 2, 4)
 
     struct set union = set_union(s, t);     // <- (0, 1, 2, 3, 4)
 
