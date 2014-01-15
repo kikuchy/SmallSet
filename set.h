@@ -14,7 +14,8 @@ struct set_iterator
   struct set *_s;
 };
 
-struct set set_construct();
+struct set set_construct_from_array(int elems[], int length);
+struct set set_empty();
 struct set set_add(struct set s, int x);
 struct set set_discard(struct set s, int x);
 int set_size(struct set s);

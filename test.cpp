@@ -4,15 +4,26 @@ extern "C"
 #include "set.h"
 }
 
-TEST(SetConstructTest, Construct)
+TEST(SetConstructTest, ConstructFromArray)
 {
-    struct set s = set_construct();
+    int array[] = {-1, 0, 2, 3, 63, 64};
+    struct set s = set_construct_from_array(array, 6);
+    uint64_t ext = (uint64_t)1 << 0;
+    ext |= (uint64_t)1 << 2;
+    ext |= (uint64_t)1 << 3;
+    ext |= (uint64_t)1 << 63;
+    EXPECT_EQ(ext, s._val);
+}
+
+TEST(SetEmptyTest, EmptySet)
+{
+    struct set s = set_empty();
     EXPECT_EQ(0, s._val);
 }
 
 TEST(SetAddTest, AddInsideOfRange)
 {
-    struct set s = set_construct();
+    struct set s = set_empty();
     s = set_add(s, 0);
     uint64_t exp = (uint64_t)1 << 0;
     EXPECT_EQ(exp, s._val);
@@ -23,7 +34,7 @@ TEST(SetAddTest, AddInsideOfRange)
 
 TEST(SetAddTest, AddOutOfRange)
 {
-    struct set s = set_construct();
+    struct set s = set_empty();
     s = set_add(s, 64);
     EXPECT_EQ(0, s._val);
     s = set_add(s, -1);
@@ -32,7 +43,7 @@ TEST(SetAddTest, AddOutOfRange)
 
 TEST(SetDiscardTest, DiscardContains)
 {
-    struct set s = set_construct();
+    struct set s = set_empty();
     s = set_add(s, 1);
     s = set_add(s, 10);
     s = set_discard(s, 1);
@@ -41,7 +52,7 @@ TEST(SetDiscardTest, DiscardContains)
 
 TEST(SetDiscardTest, DiscardNotContains)
 {
-    struct set s = set_construct();
+    struct set s = set_empty();
     s = set_add(s, 3);
     s = set_discard(s, 5);
     EXPECT_EQ((uint64_t)1 << 3, s._val);
@@ -49,7 +60,7 @@ TEST(SetDiscardTest, DiscardNotContains)
 
 TEST(SetSizeTest, GetSize)
 {
-    struct set s = set_construct();
+    struct set s = set_empty();
     EXPECT_EQ(0, set_size(s));
     s = set_add(s, 1);
     EXPECT_EQ(1, set_size(s));
@@ -59,7 +70,7 @@ TEST(SetSizeTest, GetSize)
 
 TEST(SetInTest, InContains)
 {
-    struct set s = set_construct();
+    struct set s = set_empty();
     EXPECT_FALSE(set_in(s, -1));
     EXPECT_FALSE(set_in(s, 0));
     s = set_add(s, 0);
@@ -68,7 +79,7 @@ TEST(SetInTest, InContains)
 
 TEST(SetUnionTest, Union)
 {
-    struct set s = set_construct(), t = set_construct();
+    struct set s = set_empty(), t = set_empty();
     s = set_add(s, 0);
     s = set_add(s, 1);
     s = set_add(s, 2);
@@ -85,7 +96,7 @@ TEST(SetUnionTest, Union)
 
 TEST(SetIntersectionTest, Intersection)
 {
-    struct set s = set_construct(), t = set_construct();
+    struct set s = set_empty(), t = set_empty();
     s = set_add(s, 0);
     s = set_add(s, 1);
     s = set_add(s, 2);
@@ -100,7 +111,7 @@ TEST(SetIntersectionTest, Intersection)
 
 TEST(SetDifferenceTest, Difference)
 {
-    struct set s = set_construct(), t = set_construct();
+    struct set s = set_empty(), t = set_empty();
     s = set_add(s, 0);
     s = set_add(s, 1);
     s = set_add(s, 2);
@@ -115,7 +126,7 @@ TEST(SetDifferenceTest, Difference)
 
 TEST(SetIsSubsetTest, IsSubset)
 {
-    struct set s = set_construct(), t = set_construct();
+    struct set s = set_empty(), t = set_empty();
     s = set_add(s, 0);
     s = set_add(s, 1);
     s = set_add(s, 2);
@@ -128,7 +139,7 @@ TEST(SetIsSubsetTest, IsSubset)
 
 TEST(SetIsSupersetTest, IsSuperset)
 {
-    struct set s = set_construct(), t = set_construct();
+    struct set s = set_empty(), t = set_empty();
     s = set_add(s, 0);
     s = set_add(s, 1);
     s = set_add(s, 2);
@@ -141,7 +152,7 @@ TEST(SetIsSupersetTest, IsSuperset)
 
 TEST(SetEnumerateTest, GetIterator)
 {
-    struct set s = set_construct();
+    struct set s = set_empty();
     s = set_add(s, 0);
     s = set_add(s, 1);
     s = set_add(s, 3);
@@ -166,7 +177,7 @@ TEST(SetEnumerateTest, GetIterator)
 
 TEST(SetEnumerateTest, ForLoop)
 {
-    struct set s = set_construct();
+    struct set s = set_empty();
     s = set_add(s, 0);
     s = set_add(s, 1);
     s = set_add(s, 3);

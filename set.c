@@ -2,7 +2,21 @@
 
 #define IS_IN_RANGE(x)    ((x) >= 0 && (x) < 64)
 
-struct set set_construct()
+struct set set_construct_from_array(int elems[], int length)
+{
+    struct set s;
+    int i = 0;
+    for(s._val = 0; i < length;i++)
+    {
+        if(IS_IN_RANGE(elems[i]))
+        {
+            s._val |= (uint64_t)1 << elems[i];
+        }
+    }
+    return s;
+}
+
+struct set set_empty()
 {
   struct set s;
   s._val = 0;
